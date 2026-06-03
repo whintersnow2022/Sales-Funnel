@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Filipino Finance Toolkit — Get Yours Now</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:   #F7F2E8;
+      --cream2:  #EDE6D3;
+      --ink:     #1A1612;
+      --ink2:    #2E2922;
+      --brown:   #6B4F35;
+      --amber:   #D4890A;
+      --amber2:  #F0A830;
+      --sage:    #4A6741;
+      --sage2:   #6B9466;
+      --muted:   #8A7F72;
+      --white:   #FEFCF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 56px;
+      background: rgba(247,242,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(107,79,53,0.1);
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .logo span { color: var(--amber); }
+
+    .nav-pill {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 10px 28px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+
+    .nav-pill:hover { background: var(--amber); color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 140px 56px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+    }
+
+    /* big decorative background text */
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(120px, 18vw, 220px);
+      font-weight: 900;
+      color: rgba(107,79,53,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+      z-index: 0;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .badge-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sage);
+      color: var(--white);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--amber2);
+      border-radius: 50%;
+      animation: blink 1.5s ease infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-headline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--amber);
+      position: relative;
+    }
+
+    .underline-svg {
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1.02rem;
+      line-height: 1.78;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+    /* inline form */
+    .hero-form {
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+
+    .field-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 460px;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .field-row input { flex: 1; }
+
+    input[type=text], input[type=email], input[type=tel] {
+      background: var(--white);
+      border: 1.5px solid var(--cream2);
+      color: var(--ink);
+      padding: 15px 20px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    input:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(212,137,10,0.12);
+    }
+
+    .btn-get {
+      width: 100%;
+      background: var(--amber);
+      border: none;
+      color: var(--ink);
+      padding: 17px 32px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-get:hover {
+      background: var(--amber2);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(212,137,10,0.28);
+    }
+
+    .micro-note {
+      font-size: 0.77rem;
+      color: var(--muted);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── MOCKUP STACK ── */
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-stack {
+      position: relative;
+      width: 340px;
+      height: 420px;
+    }
+
+    .mock-card {
+      position: absolute;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 24px 64px rgba(26,22,18,0.12);
+      transition: transform 0.4s ease;
+    }
+
+    .mock-card:hover { transform: translateY(-6px) rotate(0deg) !important; }
+
+    .mock-1 {
+      width: 280px;
+      background: var(--ink);
+      color: var(--cream);
+      top: 0; left: 30px;
+      transform: rotate(-3deg);
+      z-index: 1;
+    }
+
+    .mock-2 {
+      width: 280px;
+      background: var(--sage);
+      color: var(--white);
+      top: 70px; left: 60px;
+      transform: rotate(1.5deg);
+      z-index: 2;
+    }
+
+    .mock-3 {
+      width: 280px;
+      background: var(--white);
+      color: var(--ink);
+      top: 145px; left: 20px;
+      transform: rotate(-1deg);
+      z-index: 3;
+      border: 1.5px solid var(--cream2);
+    }
+
+    .mock-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .mock-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .mock-desc {
+      font-size: 0.78rem;
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+
+    .mock-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .mock-1 .mock-tag { background: var(--amber); color: var(--ink); }
+    .mock-2 .mock-tag { background: rgba(255,255,255,0.2); color: white; }
+    .mock-3 .mock-tag { background: var(--cream2); color: var(--brown); }
+
+    .float-badge {
+      position: absolute;
+      bottom: 10px;
+      right: -10px;
+      background: var(--amber);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(212,137,10,0.3);
+      z-index: 10;
+      text-align: center;
+      line-height: 1.3;
+      animation: floatY 3s ease-in-out infinite;
+    }
+
+    .float-badge strong { display: block; font-family: 'Fraunces', serif; font-size: 1.5rem; }
+
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── WHAT'S INSIDE ── */
+    .inside-section {
+      padding: 100px 56px;
+      background: var(--ink);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .inside-section::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,137,10,0.1) 0%, transparent 70%);
+    }
+
+    .inside-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .inside-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .inside-title em { font-style: italic; color: var(--amber2); }
+
+    .inside-count {
+      font-family: 'Fraunces', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: rgba(212,137,10,0.15);
+      line-height: 1;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .item-row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 36px 32px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .item-row:hover { background: rgba(212,137,10,0.07); }
+
+    .item-emoji {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .item-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .item-desc {
+      font-size: 0.87rem;
+      color: rgba(237,230,211,0.55);
+      line-height: 1.65;
+    }
+
+    .item-value {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--amber2);
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── BOOKS SHELF ── */
+    .books-section {
+      padding: 100px 56px;
+      background: var(--cream2);
+    }
+
+    .books-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .books-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .books-title em { font-style: italic; color: var(--amber); }
+
+    .books-sub {
+      color: var(--muted);
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+
+    .books-shelf {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .book-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(26,22,18,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(26,22,18,0.14);
+    }
+
+    .book-cover {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-cover-1 { background: linear-gradient(135deg, #1A1612, #4A3728); }
+    .book-cover-2 { background: linear-gradient(135deg, #2D4A2A, #4A6741); }
+    .book-cover-3 { background: linear-gradient(135deg, #4A3000, #D4890A); }
+    .book-cover-4 { background: linear-gradient(135deg, #1A2A3A, #2E5577); }
+
+    .book-cover-lines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+    }
+
+    .book-info { padding: 20px; }
+
+    .book-title {
+      font-family: 'Fraunces', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .book-author {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .book-pill {
+      display: inline-block;
+      background: var(--cream2);
+      color: var(--brown);
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-section {
+      padding: 80px 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--cream);
+    }
+
+    .proof-card {
+      padding: 40px 36px;
+      background: var(--white);
+      border: 1px solid var(--cream2);
+      transition: border-color 0.3s;
+    }
+
+    .proof-card:hover { border-color: var(--amber); }
+
+    .stars {
+      color: var(--amber);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .proof-text {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--ink2);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .proof-author {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .proof-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 120px 56px;
+      background: var(--sage);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center top, rgba(212,137,10,0.15) 0%, transparent 60%);
+    }
+
+    .final-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber2);
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .final-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .final-title em { font-style: italic; color: var(--amber2); }
+
+    .final-sub {
+      color: rgba(254,252,248,0.7);
+      font-size: 0.98rem;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+      position: relative;
+    }
+
+    .final-form {
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .final-form .field-stack { gap: 12px; }
+
+    .final-form input {
+      background: rgba(254,252,248,0.1);
+      border: 1.5px solid rgba(254,252,248,0.2);
+      color: var(--white);
+    }
+
+    .final-form input::placeholder { color: rgba(254,252,248,0.45); }
+    .final-form input:focus { border-color: var(--amber2); box-shadow: 0 0 0 3px rgba(240,168,48,0.2); }
+
+    .btn-final {
+      width: 100%;
+      background: var(--amber);
+      border: none;
+      color: var(--ink);
+      padding: 18px 32px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 4px;
+    }
+
+    .btn-final:hover {
+      background: var(--amber2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(212,137,10,0.4);
+    }
+
+    .final-note {
+      color: rgba(254,252,248,0.5);
+      font-size: 0.78rem;
+      margin-top: 14px;
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 56px;
+      background: var(--ink);
+      color: rgba(237,230,211,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; gap: 48px; }
+      .hero-bg-text { display: none; }
+      .hero-right { justify-content: flex-start; }
+      .mockup-stack { width: 280px; height: 360px; }
+      .mock-card { width: 240px; }
+      .inside-section, .books-section, .proof-section { padding: 60px 24px; }
+      .inside-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .items-grid { grid-template-columns: 1fr; }
+      .books-shelf { grid-template-columns: repeat(2, 1fr); }
+      .proof-section { grid-template-columns: 1fr; }
+      .final-cta { padding: 80px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .field-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Finance<span>Free</span></div>
+    <a href="#cta" class="nav-pill">Get the Free Kit →</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg-text">MONEY</div>
+
+    <div class="hero-left">
+      <div class="badge-row">
+        <span class="badge-dot"></span>
+        100% Free · Instant Access
+      </div>
+
+      <h1 class="hero-headline">
+        Get your free<br/>
+        <em>Filipino Finance<br/>Toolkit</em> today.
+      </h1>
+
+      <p class="hero-sub">
+        A curated bundle of <strong>finance books, planners & calculators</strong> built for Filipinos who want to save smarter, invest early, and finally take control of their money — no experience needed.
+      </p>
+
+      <div class="hero-form">
+        <div class="field-stack">
+          <div class="field-row">
+            <input type="text" placeholder="First name" />
+            <input type="text" placeholder="Last name" />
+          </div>
+          <input type="tel" placeholder="Mobile number (e.g. 09XX XXX XXXX)" />
+          <input type="email" placeholder="Email address" />
+          <button class="btn-get" onclick="handleSubmit(this, 'hero')">
+            📦 Send Me the Free Toolkit
+          </button>
+        </div>
+        <p class="micro-note">🔒 No spam, ever. Unsubscribe anytime. Your info stays private.</p>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="mockup-stack">
+        <div class="mock-card mock-1">
+          <span class="mock-icon">📊</span>
+          <div class="mock-title">Budget Planner 2025</div>
+          <div class="mock-desc">Monthly & annual templates for tracking income, expenses & savings goals.</div>
+          <span class="mock-tag">Excel Template</span>
+        </div>
+        <div class="mock-card mock-2">
+          <span class="mock-icon">📚</span>
+          <div class="mock-title">Top 10 Finance Books</div>
+          <div class="mock-desc">Curated reading list with free PDF access for every title.</div>
+          <span class="mock-tag">PDF Bundle</span>
+        </div>
+        <div class="mock-card mock-3">
+          <span class="mock-icon">🧮</span>
+          <div class="mock-title">VUL & Insurance Calculator</div>
+          <div class="mock-desc">Know exactly how much coverage you need & what you'll pay.</div>
+          <span class="mock-tag">Free Tool</span>
+        </div>
+        <div class="float-badge">
+          <strong>₱0</strong>
+          Totally Free
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT'S INSIDE ── -->
+  <section class="inside-section">
+    <div class="inside-header reveal">
+      <div>
+        <p style="font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber2);font-weight:600;margin-bottom:12px;">What's Inside the Kit</p>
+        <h2 class="inside-title">Everything you need to<br/><em>start your money journey.</em></h2>
+      </div>
+      <div class="inside-count">7+</div>
+    </div>
+
+    <div class="items-grid">
+      <div class="item-row reveal reveal-delay-1">
+        <div class="item-emoji">📘</div>
+        <div>
+          <div class="item-name">Filipino Finance Starter Guide</div>
+          <div class="item-desc">A beginner-friendly e-book covering budgeting, saving, and investing basics in the Philippine context — SSS, Pag-IBIG, BDO, GCash & more.</div>
+          <div class="item-value">Value: ₱599</div>
+        </div>
+      </div>
+      <div class="item-row reveal reveal-delay-2">
+        <div class="item-emoji">📊</div>
+        <div>
+          <div class="item-name">Monthly Budget Tracker (Excel)</div>
+          <div class="item-desc">Ready-to-use spreadsheet with automated savings rate calculator, debt tracker, and monthly summary dashboard.</div>
+          <div class="item-value">Value: ₱399</div>
+        </div>
+      </div>
+      <div class="item-row reveal reveal-delay-1">
+        <div class="item-emoji">📚</div>
+        <div>
+          <div class="item-name">Top 10 Finance Book List + Access</div>
+          <div class="item-desc">Curated titles: Rich Dad Poor Dad, The Richest Man in Babylon, I Will Teach You to Be Rich, and more — with free PDF links.</div>
+          <div class="item-value">Value: ₱1,200</div>
+        </div>
+      </div>
+      <div class="item-row reveal reveal-delay-2">
+        <div class="item-emoji">🛡️</div>
+        <div>
+          <div class="item-name">Insurance Needs Calculator</div>
+          <div class="item-desc">Input your income, dependents & goals — instantly see how much life & health coverage is right for your situation.</div>
+          <div class="item-value">Value: ₱499</div>
+        </div>
+      </div>
+      <div class="item-row reveal reveal-delay-1">
+        <div class="item-emoji">📈</div>
+        <div>
+          <div class="item-name">Investment Comparison Cheat Sheet</div>
+          <div class="item-desc">Side-by-side comparison of UITF, stocks, MP2, VUL, and time deposits — so you can choose what's right for you.</div>
+          <div class="item-value">Value: ₱299</div>
+        </div>
+      </div>
+      <div class="item-row reveal reveal-delay-2">
+        <div class="item-emoji">🎯</div>
+        <div>
+          <div class="item-name">5-Year Financial Goal Planner</div>
+          <div class="item-desc">A printable planner to map out your short, mid, and long-term financial goals with actionable monthly milestones.</div>
+          <div class="item-value">Value: ₱349</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px;" class="reveal">
+      <p style="color:rgba(237,230,211,0.45);font-size:0.85rem;margin-bottom:6px;">Total value</p>
+      <p style="font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:var(--amber2);">₱3,345 — yours free.</p>
+    </div>
+  </section>
+
+  <!-- ── BOOKS ── -->
+  <section class="books-section">
+    <div class="books-header reveal">
+      <p class="section-eyebrow">Included in the Bundle</p>
+      <h2 class="books-title">Books that will change<br/>how you think about <em>money.</em></h2>
+      <p class="books-sub">Free PDF access included with every book on this list.</p>
+    </div>
+
+    <div class="books-shelf">
+      <div class="book-card reveal reveal-delay-1">
+        <div class="book-cover book-cover-1">
+          <div class="book-cover-lines"></div>
+          <span>💰</span>
+        </div>
+        <div class="book-info">
+          <div class="book-title">Rich Dad Poor Dad</div>
+          <div class="book-author">Robert Kiyosaki</div>
+          <span class="book-pill">Mindset</span>
+        </div>
+      </div>
+      <div class="book-card reveal reveal-delay-2">
+        <div class="book-cover book-cover-2">
+          <div class="book-cover-lines"></div>
+          <span>🏛️</span>
+        </div>
+        <div class="book-info">
+          <div class="book-title">The Richest Man in Babylon</div>
+          <div class="book-author">George S. Clason</div>
+          <span class="book-pill">Savings</span>
+        </div>
+      </div>
+      <div class="book-card reveal reveal-delay-1">
+        <div class="book-cover book-cover-3">
+          <div class="book-cover-lines"></div>
+          <span>📊</span>
+        </div>
+        <div class="book-info">
+          <div class="book-title">I Will Teach You to Be Rich</div>
+          <div class="book-author">Ramit Sethi</div>
+          <span class="book-pill">Investing</span>
+        </div>
+      </div>
+      <div class="book-card reveal reveal-delay-2">
+        <div class="book-cover book-cover-4">
+          <div class="book-cover-lines"></div>
+          <span>🧠</span>
+        </div>
+        <div class="book-info">
+          <div class="book-title">The Psychology of Money</div>
+          <div class="book-author">Morgan Housel</div>
+          <span class="book-pill">Behavior</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-top:32px;" class="reveal">+ 6 more titles included in the bundle.</p>
+  </section>
+
+  <!-- ── SOCIAL PROOF ── -->
+  <section class="proof-section">
+    <div class="proof-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="proof-text">"I downloaded this expecting just another generic PDF. Instead I got actual tools I use every single month. My savings rate went from 5% to 22% in 3 months."</p>
+      <div class="proof-author">Kristine A.</div>
+      <div class="proof-role">Nurse · Quezon City</div>
+    </div>
+    <div class="proof-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="proof-text">"The insurance calculator alone was worth it. I finally understood what I was paying for and got the right plan for my family. Highly recommend."</p>
+      <div class="proof-author">Mark T.</div>
+      <div class="proof-role">OFW · Dubai</div>
+    </div>
+    <div class="proof-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="proof-text">"Nag-download lang ako expecting books pero may Excel tracker pa pala! Napakalinaw ng budget planner. Pinaka-useful na free resource sa financial planning."</p>
+      <div class="proof-author">Jessa M.</div>
+      <div class="proof-role">Virtual Assistant · Cebu</div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="final-cta" id="cta">
+    <p class="final-eyebrow reveal">100% Free · No Credit Card</p>
+    <h2 class="final-title reveal">Your financial future<br/>starts with <em>one click.</em></h2>
+    <p class="final-sub reveal">Join thousands of Filipinos who already have their free toolkit. Enter your details and we'll send it straight to your inbox.</p>
+
+    <div class="final-form reveal">
+      <div class="field-stack">
+        <div class="field-row">
+          <input type="text" placeholder="First name" />
+          <input type="text" placeholder="Last name" />
+        </div>
+        <input type="tel" placeholder="Mobile number" />
+        <input type="email" placeholder="Email address" />
+        <button class="btn-final" onclick="handleSubmit(this, 'footer')">
+          📦 Send Me the Free Toolkit
+        </button>
+      </div>
+      <p class="final-note">🔒 Zero spam. Your data is 100% private and never shared.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Finance<span>Free</span></div>
+    <div>A free resource by your PRULife UK Financial Advisor · Philippines</div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form handler
+    function handleSubmit(btn, section) {
+      const form = btn.closest('.field-stack') || btn.parentElement;
+      const inputs = btn.closest('.hero-form, .final-form').querySelectorAll('input');
+      const firstName = inputs[0].value.trim();
+      const phone = inputs[2]?.value.trim() || inputs[1].value.trim();
+
+      if (!firstName || !phone) {
+        btn.style.background = '#c0392b';
+        btn.style.color = '#fff';
+        btn.textContent = '⚠ Please fill in your name & number';
+        setTimeout(() => {
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.textContent = '📦 Send Me the Free Toolkit';
+        }, 2200);
+        return;
+      }
+
+      btn.textContent = '✓ Check your inbox — it\'s on its way!';
+      btn.style.background = '#4A6741';
+      btn.style.color = '#fff';
+      inputs.forEach(i => { i.value = ''; i.disabled = true; });
+    }
+  </script>
+</body>
+</html>
